@@ -2,7 +2,7 @@
 
 namespace Domain.ValueObjects;
 
-public record ChallengeName(string Value)
+public sealed record ChallengeName(string Value)
 {
     public static ChallengeName Create(string value)
     {

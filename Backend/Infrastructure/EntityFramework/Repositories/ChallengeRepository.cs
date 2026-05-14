@@ -5,7 +5,7 @@ namespace Infrastructure.EntityFramework.Repositories;
 
 internal sealed class ChallengeRepository(AdhdHelperDbContext context) : IChallengeRepository
 {
-    public async Task Add(Challenge challenge)
+    public async Task AddAsync(Challenge challenge)
     {
         context.Challenges.Add(challenge);
     }

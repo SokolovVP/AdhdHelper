@@ -4,5 +4,5 @@ namespace Application.Abstractions;
 
 public interface IChallengeRepository
 {
-    Task Add(Challenge challenge);
+    Task AddAsync(Challenge challenge);
 }

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.1" />
+    <PackageReference Include="WolverineFx.EntityFrameworkCore" Version="5.39.1" />
   </ItemGroup>
 
   <ItemGroup>

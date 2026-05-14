@@ -4,6 +4,8 @@ using Infrastructure.EntityFramework.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Wolverine;
+using Wolverine.EntityFrameworkCore;
 
 namespace Infrastructure;
 
@@ -14,6 +16,11 @@ public static class DependencyInjection
         services.AddDbContext<AdhdHelperDbContext>(options =>
         {
             options.UseNpgsql("DefaultConnection");
+        });
+
+        services.AddWolverine(options =>
+        {
+            options.UseEntityFrameworkCoreTransactions();
         });
 
         services.AddScoped<IChallengeRepository, ChallengeRepository>();

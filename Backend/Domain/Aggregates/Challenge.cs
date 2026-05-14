@@ -3,11 +3,13 @@ using Domain.ValueObjects;
 
 namespace Domain.Aggregates;
 
-public class Challenge
+public sealed class Challenge
 {
-    public Guid Id { get; init; }
-    public ChallengeName Name { get; init; }
-    public ICollection<ChallengeStage> Stages { get; init; } = [];
+    private readonly List<ChallengeStage> _stages = [];
+
+    public Guid Id { get; private set; }
+    public ChallengeName Name { get; private set; }
+    public IReadOnlyCollection<ChallengeStage> Stages => _stages.AsReadOnly();
 
     private Challenge(
         Guid id,
@@ -23,5 +25,10 @@ public class Challenge
         return new Challenge(
             Guid.CreateVersion7(),
             ChallengeName.Create(name));
+    }
+
+    public void AddStages(IEnumerable<ChallengeStage> stages)
+    {
+        _stages.AddRange(stages);
     }
 }
