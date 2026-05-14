@@ -1,4 +1,4 @@
-﻿using Application.Dtos;
+﻿using Application.Commands.Dtos;
 
 namespace Application.Commands.CreateChallenge;
 
