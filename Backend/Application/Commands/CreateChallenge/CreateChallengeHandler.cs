@@ -19,8 +19,8 @@ public sealed class CreateChallengeHandler
                 item.OrderNumber))
             .ToList();
 
-        challenge.addsta
+        challenge.AddStages(stages);
 
-        await challenge.Stages.Add();
+        await challengeRepository.AddAsync(challenge);
     }
 }
