@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/Application/" />
+  <Folder Name="/Domain/" />
+  <Folder Name="/Infrastructure/" />
+  <Folder Name="/Presentation/">
+    <Project Path="AdhdHelper/AdhdHelper.csproj" />
+  </Folder>
+</Solution>
