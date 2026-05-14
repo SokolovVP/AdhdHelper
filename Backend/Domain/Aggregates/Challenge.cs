@@ -1,4 +1,5 @@
-﻿using Domain.ValueObjects;
+﻿using Domain.Entities;
+using Domain.ValueObjects;
 
 namespace Domain.Aggregates;
 
@@ -6,6 +7,7 @@ public class Challenge
 {
     public Guid Id { get; init; }
     public ChallengeName Name { get; init; }
+    public ICollection<ChallengeStage> Stages { get; init; } = [];
 
     private Challenge(
         Guid id,
@@ -15,7 +17,8 @@ public class Challenge
         Name = name;
     }
 
-    public static Challenge Create(string name)
+    public static Challenge Create(
+        string name)
     {
         return new Challenge(
             Guid.CreateVersion7(),
