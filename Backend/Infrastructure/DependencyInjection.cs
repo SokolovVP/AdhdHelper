@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Wolverine;
 using Wolverine.EntityFrameworkCore;
+using Wolverine.Persistence;
 
 namespace Infrastructure;
 
@@ -20,7 +21,7 @@ public static class DependencyInjection
 
         services.AddWolverine(options =>
         {
-            options.UseEntityFrameworkCoreTransactions();
+            options.UseEntityFrameworkCoreTransactions(TransactionMiddlewareMode.Lightweight);
         });
 
         services.AddScoped<IChallengeRepository, ChallengeRepository>();
