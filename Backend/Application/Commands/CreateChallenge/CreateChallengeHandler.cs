@@ -6,7 +6,7 @@ namespace Application.Commands.CreateChallenge;
 
 public sealed class CreateChallengeHandler
 {
-    public async Task Handle(
+    public async Task HandleAsync(
         CreateChallengeCommand command,
         IChallengeRepository challengeRepository)
     {
