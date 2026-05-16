@@ -1,5 +1,6 @@
 ﻿using Application.Abstractions;
 using Application.Queries.ReadModels;
+using Domain.Exceptions;
 
 namespace Application.Queries.GetChallenge;
 
@@ -11,12 +12,16 @@ public sealed class GetChallengByIdHandler
     {
         var challenge = await challengeRepository.GetByIdAsync(query.Id);
 
+        if (challenge is null)
+        {
+            throw new NotFoundException("Challenge with required id was not found");
+        }
+
         var challengeStages = challenge.Stages
             .Select(item => new ChallengeStageReadModel(
                 item.Id,
-                item.ChallengeId,
                 item.Name.Value,
-                item.OrderNumber.value))
+                item.OrderNumber.Value))
             .ToList()
             .AsReadOnly();
 

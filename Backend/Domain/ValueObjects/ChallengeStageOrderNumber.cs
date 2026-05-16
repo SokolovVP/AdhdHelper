@@ -2,8 +2,12 @@
 
 namespace Domain.ValueObjects;
 
-public sealed record ChallengeStageOrderNumber(int value)
+public sealed record ChallengeStageOrderNumber
 {
+    public int Value { get; }
+
+    private ChallengeStageOrderNumber(int value) => Value = value;
+
     public static ChallengeStageOrderNumber Create(int value)
     {
         if (value < 0)

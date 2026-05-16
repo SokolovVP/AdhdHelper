@@ -10,16 +10,15 @@ public sealed class CreateChallengeHandler
         CreateChallengeCommand command,
         IChallengeRepository challengeRepository)
     {
-        var challenge = Challenge.Create(command.Name);
-
         var stages = command.Stages
             .Select(item => ChallengeStage.Create(
-                challenge.Id,
                 item.Name,
                 item.OrderNumber))
             .ToList();
 
-        challenge.AddStages(stages);
+        var challenge = Challenge.Create(
+            command.Name,
+            stages);
 
         await challengeRepository.AddAsync(challenge);
     }

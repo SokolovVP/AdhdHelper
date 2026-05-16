@@ -2,8 +2,12 @@
 
 namespace Domain.ValueObjects;
 
-public sealed record ChallengeName(string Value)
+public sealed record ChallengeName
 {
+    public string Value { get; }
+
+    private ChallengeName(string value) => Value = value;
+
     public static ChallengeName Create(string value)
     {
         if (string.IsNullOrEmpty(value))

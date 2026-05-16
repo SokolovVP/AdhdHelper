@@ -4,5 +4,5 @@ namespace Application.Abstractions;
 
 public interface IChallengeReadOnlyRepository
 {
-    Task<Challenge> GetByIdAsync(Guid id);
+    Task<Challenge?> GetByIdAsync(Guid id);
 }

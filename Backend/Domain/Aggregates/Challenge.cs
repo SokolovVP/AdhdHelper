@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Exceptions;
 using Domain.ValueObjects;
 
 namespace Domain.Aggregates;
@@ -9,26 +10,40 @@ public sealed class Challenge
 
     public Guid Id { get; private set; }
     public ChallengeName Name { get; private set; }
+    public ChallengeCompletion Completion { get; private set; }
     public IReadOnlyCollection<ChallengeStage> Stages => _stages.AsReadOnly();
 
     private Challenge(
         Guid id,
-        ChallengeName name)
+        ChallengeName name,
+        ChallengeCompletion completed,
+        List<ChallengeStage> stages)
     {
         Id = id;
         Name = name;
+        Completion = completed;
+        _stages = stages;
     }
 
     public static Challenge Create(
-        string name)
+        string name,
+        IReadOnlyCollection<ChallengeStage> stages)
     {
+        EnsureStagesHaveUniqueOrderNumbers(stages);
+
         return new Challenge(
             Guid.CreateVersion7(),
-            ChallengeName.Create(name));
+            ChallengeName.Create(name),
+            ChallengeCompletion.NotCompleted(),
+            stages.ToList());
     }
 
-    public void AddStages(IEnumerable<ChallengeStage> stages)
+    private static void EnsureStagesHaveUniqueOrderNumbers(IReadOnlyCollection<ChallengeStage> stages)
     {
-        _stages.AddRange(stages);
+        if (stages.Select(item => item.OrderNumber)
+            .ToHashSet().Count != stages.Count)
+        {
+            throw new ValidationException("Stages order numbers must be unique");
+        }
     }
 }
