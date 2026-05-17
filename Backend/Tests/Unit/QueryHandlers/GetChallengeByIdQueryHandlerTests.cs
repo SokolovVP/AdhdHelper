@@ -50,8 +50,10 @@ internal sealed class GetChallengeByIdQueryHandlerTests
 
         var query = new GetChallengeByIdQuery(challengeId);
 
-        await Assert.That(() =>
-            _handler.HandleAsync(query, _challengeReadOnlyRepository)!)
-            .Throws<NotFoundException>();
+        var act = () => (_handler.HandleAsync(query, _challengeReadOnlyRepository));
+
+        await act.Should()
+            .ThrowAsync<NotFoundException>()
+            .WithMessage("Challenge with required id was not found");
     }
 }
